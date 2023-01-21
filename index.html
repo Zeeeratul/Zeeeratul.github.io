@@ -4,9 +4,19 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+    <script type="module" defer src="index.js"></script>
+
     <title>ReactBoy</title>
   </head>
   <body>
-    <p>Hello World !</p>
+    <canvas id="canvas" width="160" height="144"></canvas>
+
+    <div id="controls">
+      <button id="loadRom">Load ROM</button>
+      <button id="reset">Reset</button>
+    </div>
+
+    <input type="file" id="file" />
   </body>
 </html>
