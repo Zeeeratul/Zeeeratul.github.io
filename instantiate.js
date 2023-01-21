@@ -1,6 +1,6 @@
 export async function instantiate(module, imports = {}) {
   const adaptedImports = {
-    env: Object.assign(Object.create({}), imports.env || {}, {
+    env: Object.assign(Object.create(globalThis), imports.env || {}, {
       abort(message, fileName, lineNumber, columnNumber) {
         // ~lib/builtins/abort(~lib/string/String | null?, ~lib/string/String | null?, u32?, u32?) => void
         message = __liftString(message >>> 0);
