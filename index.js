@@ -1,4 +1,4 @@
-import { instantiate } from "./instantiate.js";
+import { instantiate } from "./release.js";
 import { updateInputs, wasmSetJoypadState } from "./joypad.js";
 
 const loadRomBtn = document.getElementById("loadRom");
@@ -48,7 +48,6 @@ fileInput.onchange = (e) => {
 
 function play() {
   setInterval(() => {
-    console.log("cc");
     wasmSetJoypadState(wasmExports);
     wasmExports.execFrame(1);
     const screenBuffer = wasmExports.getScreen();
