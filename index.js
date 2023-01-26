@@ -3,6 +3,8 @@ import { updateInputs, wasmSetJoypadState } from "./joypad.js";
 
 const loadRomBtn = document.getElementById("loadRom");
 const resetBtn = document.getElementById("reset");
+const saveProgressBtn = document.getElementById("saveProgress");
+const loadProgressBtn = document.getElementById("loadProgress");
 const fileInput = document.getElementById("file");
 const canvas = document.getElementById("canvas");
 const context = canvas.getContext("2d");
@@ -55,6 +57,21 @@ function play() {
     context.putImageData(imageData, 0, 0);
   }, 1000 / 60);
 }
+
+saveProgressBtn.onclick = function saveProgress() {
+  const registers = wasmExports.getRegisters();
+  const memory = wasmExports.getMemory();
+  const saveState = Array.from(memory).concat(Array.from(registers));
+  localStorage.setItem("save", JSON.stringify(saveState));
+};
+
+loadProgressBtn.onclick = function loadProgress() {
+  const save = localStorage.getItem("save");
+  if (save) {
+    const saveBuffer = JSON.parse(save);
+    wasmExports.loadSave(saveBuffer);
+  }
+};
 
 window.addEventListener("keydown", (e) => updateInputs(e.key, true));
 window.addEventListener("keyup", (e) => updateInputs(e.key, false));

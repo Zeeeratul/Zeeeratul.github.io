@@ -40,6 +40,11 @@ export async function instantiate(module, imports = {}) {
       // assembly/index/getScreen() => ~lib/typedarray/Uint8ClampedArray
       return __liftTypedArray(Uint8ClampedArray, exports.getScreen() >>> 0);
     },
+    loadSave(saveState) {
+      // assembly/index/loadSave(~lib/array/Array<u16>) => void
+      saveState = __lowerArray(__setU16, 12, 1, saveState) || __notnull();
+      exports.loadSave(saveState);
+    },
     getMemory() {
       // assembly/Memory/debug/getMemory() => ~lib/typedarray/Uint8Array
       return __liftTypedArray(Uint8Array, exports.getMemory() >>> 0);
@@ -72,6 +77,21 @@ export async function instantiate(module, imports = {}) {
     while (end - start > 1024) string += String.fromCharCode(...memoryU16.subarray(start, start += 1024));
     return string + String.fromCharCode(...memoryU16.subarray(start, end));
   }
+  function __lowerArray(lowerElement, id, align, values) {
+    if (values == null) return 0;
+    const
+      length = values.length,
+      buffer = exports.__pin(exports.__new(length << align, 1)) >>> 0,
+      header = exports.__pin(exports.__new(16, id)) >>> 0;
+    __setU32(header + 0, buffer);
+    __dataview.setUint32(header + 4, buffer, true);
+    __dataview.setUint32(header + 8, length << align, true);
+    __dataview.setUint32(header + 12, length, true);
+    for (let i = 0; i < length; ++i) lowerElement(buffer + (i << align >>> 0), values[i]);
+    exports.__unpin(buffer);
+    exports.__unpin(header);
+    return header;
+  }
   function __liftTypedArray(constructor, pointer) {
     if (!pointer) return null;
     return new constructor(
@@ -97,6 +117,14 @@ export async function instantiate(module, imports = {}) {
     throw TypeError("value must not be null");
   }
   let __dataview = new DataView(memory.buffer);
+  function __setU16(pointer, value) {
+    try {
+      __dataview.setUint16(pointer, value, true);
+    } catch {
+      __dataview = new DataView(memory.buffer);
+      __dataview.setUint16(pointer, value, true);
+    }
+  }
   function __setU32(pointer, value) {
     try {
       __dataview.setUint32(pointer, value, true);
