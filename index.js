@@ -59,10 +59,14 @@ function play() {
 }
 
 saveProgressBtn.onclick = function saveProgress() {
-  const registers = wasmExports.getRegisters();
-  const memory = wasmExports.getMemory();
-  const saveState = Array.from(memory).concat(Array.from(registers));
-  localStorage.setItem("save", JSON.stringify(saveState));
+  if (
+    confirm("Do you want to save ? This will erase your previous save") == true
+  ) {
+    const registers = wasmExports.getRegisters();
+    const memory = wasmExports.getMemory();
+    const saveState = Array.from(memory).concat(Array.from(registers));
+    localStorage.setItem("save", JSON.stringify(saveState));
+  }
 };
 
 loadProgressBtn.onclick = function loadProgress() {
