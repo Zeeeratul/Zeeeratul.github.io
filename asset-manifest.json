@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.a20c2039.css",
-    "main.js": "/static/js/main.59a56e14.js",
+    "main.css": "/static/css/main.10bf63e6.css",
+    "main.js": "/static/js/main.9b5299e4.js",
     "static/js/271.7838215a.chunk.js": "/static/js/271.7838215a.chunk.js",
     "service-worker.js": "/service-worker.js",
     "static/media/GameBoy.woff": "/static/media/GameBoy.b01490652c1f59141b12.woff",
     "index.html": "/index.html",
-    "main.a20c2039.css.map": "/static/css/main.a20c2039.css.map",
-    "main.59a56e14.js.map": "/static/js/main.59a56e14.js.map",
+    "main.10bf63e6.css.map": "/static/css/main.10bf63e6.css.map",
+    "main.9b5299e4.js.map": "/static/js/main.9b5299e4.js.map",
     "271.7838215a.chunk.js.map": "/static/js/271.7838215a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a20c2039.css",
-    "static/js/main.59a56e14.js"
+    "static/css/main.10bf63e6.css",
+    "static/js/main.9b5299e4.js"
   ]
 }

@@ -1,0 +1,2 @@
+*,:after,:before{box-sizing:border-box}@font-face{font-family:GameBoy;src:local("GameBoy"),url(/static/media/GameBoy.b01490652c1f59141b12.woff) format("woff")}*{user-zoom:none;font-family:GameBoy,sans-serif;-webkit-user-select:none;-ms-user-select:none;user-select:none}body{background-color:#418ea4;margin:0;min-height:100vh;min-height:calc(var(--vh, 1vh)*100);min-width:100vw;min-width:calc(var(--vw, 1vw)*100);padding:0;position:fixed}#root,body{display:flex}#root{flex:1 1}
+/*# sourceMappingURL=main.10bf63e6.css.map*/
